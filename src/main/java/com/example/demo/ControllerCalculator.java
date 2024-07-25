@@ -20,22 +20,42 @@ public class ControllerCalculator {
     }
 
     @GetMapping(path = "/plus")
-    public String calculatorSum(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
-        return num1 + " + " +  num2 + " = " + calculatorService.plus(num1, num2);
+    public String calculatorSum(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+        if (num2 == null || num1 == null) {
+            return "Введите два числа"; }
+        else {
+            return num1 + " + " +  num2 + " = " + calculatorService.plus(num1, num2);
+        }
+
     }
 
     @GetMapping(path = "/minus")
-    public String calculatorMinus(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
-        return num1 + " - " +  num2 + " = " + calculatorService.minus(num1, num2);
+    public String calculatorMinus(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+        if (num2 == null || num1 == null) {
+            return "Введите два числа";
+        } else {
+            return num1 + " - " +  num2 + " = " + calculatorService.minus(num1, num2);
+        }
     }
 
     @GetMapping(path = "/multiply")
-    public String calculatorMultiply(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
-        return num1 + " * " +  num2 + " = " + calculatorService.multiply(num1, num2);
+    public String calculatorMultiply(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+        if (num2 == null || num1 == null) {
+            return "Введите два числа";
+        } else {
+            return num1 + " * " +  num2 + " = " + calculatorService.multiply(num1, num2);
+        }
+
     }
 
     @GetMapping(path = "/divide")
-    public String calculatorDivide(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
-        return num1 + " / " +  num2 + " = " + calculatorService.divide(num1, num2);
+    public String calculatorDivide(@RequestParam(required = false) Integer num1, @RequestParam(required = false) Integer num2) {
+        if (num1 == null || num2 == null) {
+            return "Введите два числа";
+        } else if (num2 == 0){
+            return "Нельно делить на 0"; }
+        else {
+            return num1 + " / " +  num2 + " = " + calculatorService.divide(num1, num2);
+        }
     }
 }
